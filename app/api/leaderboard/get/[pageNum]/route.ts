@@ -1,6 +1,6 @@
 import { NextRequest,NextResponse } from "next/server";
-import { connectDB } from "@/app/config/connectDB";
-import LeaderboardModel from "@/app/models/leaderboardModel";
+import { connectDB } from "@/lib/connectDB";
+import LeaderboardModel from "@/lib/models/leaderboardModel";
 
 type Params = {
     pageNum: string

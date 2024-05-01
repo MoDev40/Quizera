@@ -14,6 +14,7 @@ import Hero from './Hero';
 import { Choices, useUser } from '../hooks/UserContext';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import {zodResolver} from "@hookform/resolvers/zod"
 
 interface TriviaCategory {
   id:number;
@@ -25,9 +26,9 @@ interface TriviaCategories {
 }
 
 const optionsSchema = z.object({
-  level:z.string().min(1),
-  category:z.string().min(1),
-  count:z.string().min(1),
+  level:z.string().min(1,"must choose level"),
+  category:z.string().min(1,"must choose category"),
+  count:z.string().min(1,"must choose count"),
 })
 
 type Inputs = z.infer<typeof optionsSchema> 
@@ -41,21 +42,18 @@ function isUndefined(checker:any):boolean {
 function pointIdentifier(level:string):number {
   return level === "easy"  ?  3 : 5
 }
+
 const fetcher: Fetcher<any,string> = (url): Promise<TriviaCategories> =>
 fetch(url,{cache:"no-cache"}).then((res) => res.json());
 
 
 const HomeHero = () => {
-  const form = useForm<Inputs>()
+  const form = useForm<Inputs>({resolver:zodResolver(optionsSchema)})
   const {data:categories,isLoading} = useSWR<TriviaCategories>("https://opentdb.com/api_category.php",fetcher)
   const {user,setChoices} = useUser()
   const router = useRouter()
 
   const onSubmit : SubmitHandler<Inputs> = (data) =>{
-    if(isUndefined(data.level) || isUndefined(data.count) || isUndefined(data.category)){
-      toast("Please select choice")
-      return
-    }
     const choices : Choices = {
       level:data.level,
       category_id:Number(data.category),

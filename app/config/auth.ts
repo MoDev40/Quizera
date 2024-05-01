@@ -1,7 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import { NextAuthOptions } from "next-auth";
-import { connectDB } from "./connectDB";
-import UserModel from "../models/userModel";
+import { connectDB } from "../../lib/connectDB";
+import UserModel from "../../lib/models/userModel";
 
 const GOOGLE_CLIENT_ID = process.env.AUTH_GOOGLE_CLIENT_ID!
 const GOOGLE_CLIENT_SECRET = process.env.AUTH_GOOGLE_CLIENT_SECRET!

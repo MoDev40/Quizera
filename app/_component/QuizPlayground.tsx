@@ -64,7 +64,7 @@ const QuizPlayground = () => {
       };
 
     const updateLeader = async()=>{
-      setIsDone(true)
+      setResultLoad(true)
       fetch(`/api/leaderboard/update/${user?.user?.email}`,{
         method:"PUT",
         body: JSON.stringify({points})
@@ -104,7 +104,7 @@ const QuizPlayground = () => {
     <div className='flex justify-center'>
       {
         resultLoad ? 
-        <Spinner status='calculating result....'/>
+        <Spinner status='calculating result & pushing leaderboard.....'/>
         :
         <Button className='mt-10' disabled={resultLoad} onClick={updateLeader}>Push Result to Leaderboard</Button>
       }

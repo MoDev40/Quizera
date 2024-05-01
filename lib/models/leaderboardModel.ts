@@ -20,7 +20,7 @@ const leaderboardSchema = new Schema({
         type:Number,
         required:true
     }
-})
+},{timestamps:true})
 
 const LeaderboardModel = models.Leaderboard || model("Leaderboard",leaderboardSchema)
 export default LeaderboardModel as Model<LeaderboardDocument>

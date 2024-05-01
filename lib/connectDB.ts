@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { uri } from "./config";
+import { uri } from "../app/config/config";
 
 export const connectDB = async()=>{
     mongoose.connect(uri).then(()=>{

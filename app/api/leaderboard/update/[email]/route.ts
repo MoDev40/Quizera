@@ -1,7 +1,7 @@
 import { NextRequest,NextResponse } from "next/server";
-import { connectDB } from "@/app/config/connectDB";
-import UserModel from "@/app/models/userModel";
-import LeaderboardModel from "@/app/models/leaderboardModel";
+import { connectDB } from "@/lib/connectDB";
+import UserModel from "@/lib/models/userModel";
+import LeaderboardModel from "@/lib/models/leaderboardModel";
 
 type Params = {
     email: string
@@ -20,8 +20,8 @@ export async function PUT(req:NextRequest,{params}:{params:Params}){
 
         connectDB();
         
-        const {points}:{points:number} = await req.json();
-        const {email} = params
+        const { points }:{ points:number } = await req.json();
+        const { email } = params
 
         const user = await UserModel.findOne({email});
 

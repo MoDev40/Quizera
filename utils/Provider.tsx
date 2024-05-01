@@ -10,7 +10,7 @@ const Provider = ({children}:{children:React.ReactNode}) => {
       <UserProvider>
         {children}
       </UserProvider>
-        <Toaster />
+      <Toaster />
     </SessionProvider>
   )
 }
